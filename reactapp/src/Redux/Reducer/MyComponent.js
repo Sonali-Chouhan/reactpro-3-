@@ -5,19 +5,57 @@ import { bindActionCreators } from "redux";
 export class MyComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      title: "",
+      search: "",
+      Data: [],
+    };
+    // console.log("666",this.state.Data)
   }
+  componentDidMount() {
+    this.props.getUser();
+    var item=this.props.User;
+    this.setState({
+      Data:item
+    })
+    console.log("9999",item);
 
-  componentDidMount(){
-    this.props.getUser()
+
   }
+  handleChangeValue = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
+  handleSearch = () => {
+    // var Data=this.state.Data
+    // var search=this.state.search
+    // let item= Data.filter(value => {
+    // return (
+    //     value.firstName?.toLowerCase().includes(search.toLowerCase()) ||
+    //      value.visits
+    //       .toString()
+    //       .toLowerCase()
+    //       .includes(search.toLowerCase())
+    //   );
+    // });
+    // this.setState({ Data:item });
+  };
   render() {
-    console.log("test", this.props.User);
-
+        console.log("888",this.props.User)
     return (
       <div>
-        {/* <button onClick={()=>this.handleClick()}>click</button> */}
+        <form onSubmit={this.handleSearch}>
+          <input
+            type="text"
+            name="title"
+            value={this.state.title}
+            onChange={this.handleChangeValue}
+            placeholder="Search Box"
+          />
+          <input type="submit" value="Submit" />
+        </form>
         <h1>Table</h1>
         <table border="1">
           <thead>
@@ -53,11 +91,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: bindActionCreators(getUser, dispatch),
-    // handleClick: () => dispatch({ type: 'Get_User' }),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);

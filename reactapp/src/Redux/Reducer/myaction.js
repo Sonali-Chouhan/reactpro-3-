@@ -1,6 +1,7 @@
 import axios from "axios"
 export const Get_User = 'Get_User';
  export const getUser=()=>{
+   
     return (dispatch) => {
         return axios.get(`https://jsonplaceholder.typicode.com/posts`)
             .then(response => {
@@ -17,7 +18,7 @@ export const Get_User = 'Get_User';
                 throw (error);
             });
     };
- } 
-   
- 
- export default getUser;
+}
+
+
+export default getUser;
