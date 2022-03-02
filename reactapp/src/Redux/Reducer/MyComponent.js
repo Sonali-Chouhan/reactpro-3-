@@ -6,55 +6,41 @@ export class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
       search: "",
       Data: [],
     };
-    // console.log("666",this.state.Data)
   }
   componentDidMount() {
     this.props.getUser();
-    var item=this.props.User;
-    this.setState({
-      Data:item
-    })
-    console.log("9999",item);
-
-
   }
-  handleChangeValue = (event) => {
+   static getDerivedStateFromProps(props, state) {
+      return {
+        Data: props.User ,
+       };
+
+    }
+  handleChangeValue = (e) => {
+    var search = e.target.value;
+    var Data = this.props.User.filter((e) => {
+      return e.title.includes(search);
+    });
     this.setState({
-      [event.target.name]: event.target.value,
+      Data: Data,
+      search: search,
     });
   };
-
-  handleSearch = () => {
-    // var Data=this.state.Data
-    // var search=this.state.search
-    // let item= Data.filter(value => {
-    // return (
-    //     value.firstName?.toLowerCase().includes(search.toLowerCase()) ||
-    //      value.visits
-    //       .toString()
-    //       .toLowerCase()
-    //       .includes(search.toLowerCase())
-    //   );
-    // });
-    // this.setState({ Data:item });
-  };
   render() {
-        console.log("888",this.props.User)
+    console.log(222222, this.state.Data)
     return (
       <div>
-        <form onSubmit={this.handleSearch}>
+        <form>
           <input
             type="text"
             name="title"
-            value={this.state.title}
-            onChange={this.handleChangeValue}
+            value={this.state.search}
+            onChange={(e) => this.handleChangeValue(e)}
             placeholder="Search Box"
           />
-          <input type="submit" value="Submit" />
         </form>
         <h1>Table</h1>
         <table border="1">
@@ -67,13 +53,13 @@ export class MyComponent extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.User.map((item, id) => {
+            {this.state.Data.map((e, id) => {
               return (
                 <tr key={id}>
-                  <td> {item.userId}</td>
-                  <td>{item.id}</td>
-                  <td>{item.title}</td>
-                  <td>{item.body}</td>
+                  <td> {e.userId}</td>
+                  <td>{e.id}</td>
+                  <td>{e.title}</td>
+                  <td>{e.body}</td>
                 </tr>
               );
             })}

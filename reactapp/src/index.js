@@ -2,18 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import MyComponent from './Redux/Reducer/MyComponent'
-import {store} from './MyStore'
-import { Provider } from "react-redux";
+//import MyComponent from './Redux/Reducer/MyComponent'
+//import {store} from './MyStore'
+//import { Provider } from "react-redux";
 
 ReactDOM.render(
   <div>
     <React.StrictMode>
-    <Provider store={store}>
+    {/* <Provider store={store}> */}
       <App />
       
-     <MyComponent/>
-    </Provider>
+     {/* <MyComponent/> */}
+    {/* </Provider> */}
   </React.StrictMode>,
    
     
