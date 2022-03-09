@@ -1,5 +1,5 @@
 import React from "react";
-import { getUser } from "./myaction";
+import { getUser } from "../Redux/Action/myaction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 export class MyComponent extends React.Component {

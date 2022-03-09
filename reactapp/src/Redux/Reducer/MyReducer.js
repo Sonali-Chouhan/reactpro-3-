@@ -8,7 +8,7 @@ export const Myreducer=function(state=initialState,action){
     switch(action.type){
         
         case 'Get_User':
-            // debugger
+           
         return {
            
                   ...state,

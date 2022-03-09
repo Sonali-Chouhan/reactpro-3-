@@ -1,10 +1,11 @@
 import React from "react"
 import './App.css';
-import Parent from "./Parent";
+import Profile from "./Component/Profile";
+
 function App() {
   return (
     <div className="App">
-     <Parent/>
+ <Profile/>
     </div>
   );
 }

@@ -53,24 +53,3 @@ render() {
     );
   }
 }
-// var Data= this.state.Data;
-   
-    // var searchString = this.state.search.trim().toLowerCase();
-    
-    // if (searchString.length > 0) {
-    //   Data = Data.filter((e) => e.title?.toLowerCase().match(searchString));
-    // }
- // handleSearch = () => {
-  //   var Data=this.state.Data
-  //   var search=this.state.search
-  //   let item= Data.filter(value => {
-  //   return (
-  //       value.firstName?.toLowerCase().includes(search.toLowerCase()) ||
-  //        value.visits
-  //         .toString()
-  //         .toLowerCase()
-  //         .includes(search.toLowerCase())
-  //     );
-  //   });
-  //   this.setState({ Data:item });
-  // };
