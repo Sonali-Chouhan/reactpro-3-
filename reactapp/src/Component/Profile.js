@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addTodo, deleteTodo, editTodo } from "../Redux/Action/ProfileAction";
 import { useDispatch, useSelector } from "react-redux";
 const Profile = () => {
   const [user, setuser] = useState({
     name: "",
     email: "",
+    id:0
   });
   const data = useSelector((state) => state.ProfileReducer.data);
+  const test = useSelector((state) => state.ProfileReducer);
+  const record = test.isEdit;
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addTodo(user));
+    dispatch(addTodo(user,user.id+1));
     setuser({
       ...user,
       name: "",
       email: "",
+      id:user.id+1
     });
   };
-  const handleDelete = (id) => {
-    dispatch(deleteTodo(id));
+  const handleDelete = (index) => {
+    dispatch(deleteTodo(index));
   };
-  const handleEdit = (id) => {
-    dispatch(editTodo(id));
+  const handleEdit = (index) => {
+    dispatch(editTodo(index));
   };
+
+  useEffect(() => {
+    var item = record;
+    
+    if (item) {
+      setuser({
+        name: item.name,
+        email: item.email,
+      });
+    }
+  }, [record]);
   return (
     <div>
       <h1>Function Component And Redux</h1>
@@ -52,25 +67,24 @@ const Profile = () => {
       <table border="1">
         <thead>
           <tr>
-            <th>Id</th>
+            <th>Index</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <th colSpan={2}>Action</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item, id) => {
+          {data.map((item, index) => {
             return (
-              <tr key={id}>
-                <td>{id}</td>
+              <tr key={index}>
+                <td>{index}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>
-                  <button onClick={() => handleDelete(id)}>Delete</button>
+                  <button onClick={() => handleDelete(index)}>Delete</button>
                 </td>
                 <td>
-                  <button onClick={() => handleEdit(id)}>Edit</button>
+                  <button onClick={() => handleEdit(index)}>Edit</button>
                 </td>
               </tr>
             );
