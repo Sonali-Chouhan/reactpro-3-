@@ -1,45 +1,53 @@
 const initialState = {
   data: [],
-  
 };
 export const ProfileReducer = function (state = initialState, action) {
-  console.log("action",action)
   switch (action.type) {
+    //Add User
+
     case "Add_Data":
-    
-      let item=action.payload
-      console.log("action",action.payload)
-        if(action.id)
-        {
-          
-          item.splice(action.id,1,{
-            name:action.payload.name,
-            email:action.payload.email
-          })
-        }
-      else{
-        return {
-          ...state,
-          data: [...state.data, action.payload],
-        
-        };
-      }
-     
-    
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+      };
+    //Delete User
+
     case "Delete_Data":
       let list = state.data;
       list.splice(action.payload, 1);
       return { ...state, data: [...list] };
-    
+
+    //Edit User
     case "Edit_Data":
       let items = state.data;
       let current_object = items[action.payload];
-      console.log("current object",current_object)
-      return{
+
+      return {
         ...state,
-        isEdit:current_object
+        isEdit: current_object,
+      };
+
+    //Update_User
+    case "Update_Data":
+      for (let i in state.data) {
+        debugger
+        if (state.data[i].id === action.payload.id) {
+          state.data[i].name = action.payload.name;
+          state.data[i].email = action.payload.email;
+        }
       }
-    
+   
+      //   state.data.forEach((item)=>{
+      //     if(item.id===action.payload.id){
+      //       item.name = action.payload.name
+      //       item.email = action.payload.email
+      //     }
+      // })
+      return {
+        ...state,
+        isEdit: false,
+      };
+
     default:
       return state;
   }

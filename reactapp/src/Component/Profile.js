@@ -1,38 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { addTodo, deleteTodo, editTodo } from "../Redux/Action/ProfileAction";
+import {
+  addTodo,
+  deleteTodo,
+  editTodo,
+  updateTodo,
+} from "../Redux/Action/ProfileAction";
 import { useDispatch, useSelector } from "react-redux";
+
 const Profile = () => {
   const [user, setuser] = useState({
     name: "",
     email: "",
-    id:0
   });
+  const [id, setId] = useState(1)
+
   const data = useSelector((state) => state.ProfileReducer.data);
   const test = useSelector((state) => state.ProfileReducer);
   const record = test.isEdit;
+  
+  //despach method
   const dispatch = useDispatch();
+
+  
+
+  //Submit code here
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addTodo(user,user.id+1));
+    if (record) {
+      dispatch(updateTodo(user));
+    } 
+    else {
+      user['id'] = id
+      
+      dispatch(addTodo(user));
+    }
+    setId(id+1);
     setuser({
       ...user,
       name: "",
       email: "",
-      id:user.id+1
     });
   };
+
+  //delete record
   const handleDelete = (index) => {
     dispatch(deleteTodo(index));
   };
+  
+  //edit user
   const handleEdit = (index) => {
     dispatch(editTodo(index));
   };
 
   useEffect(() => {
     var item = record;
-    
+    console.log(12211212, item)
     if (item) {
       setuser({
+        ...user,
         name: item.name,
         email: item.email,
       });
@@ -68,9 +93,10 @@ const Profile = () => {
         <thead>
           <tr>
             <th>Index</th>
+            <th>Id</th>
             <th>Name</th>
             <th>Email</th>
-            <th colSpan={2}>Action</th>
+            <th colSpan={3}>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -78,6 +104,7 @@ const Profile = () => {
             return (
               <tr key={index}>
                 <td>{index}</td>
+                <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>
