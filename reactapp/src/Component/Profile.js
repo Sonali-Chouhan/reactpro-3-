@@ -12,29 +12,26 @@ const Profile = () => {
     name: "",
     email: "",
   });
-  const [id, setId] = useState(1)
+  const [id, setId] = useState(1);
 
   const data = useSelector((state) => state.ProfileReducer.data);
   const test = useSelector((state) => state.ProfileReducer);
   const record = test.isEdit;
-  
+
   //despach method
   const dispatch = useDispatch();
-
-  
 
   //Submit code here
   const handleSubmit = (event) => {
     event.preventDefault();
     if (record) {
       dispatch(updateTodo(user));
-    } 
-    else {
-      user['id'] = id
-      
+    } else {
+      user["id"] = id;
+
       dispatch(addTodo(user));
     }
-    setId(id+1);
+    setId(id + 1);
     setuser({
       ...user,
       name: "",
@@ -46,15 +43,14 @@ const Profile = () => {
   const handleDelete = (index) => {
     dispatch(deleteTodo(index));
   };
-  
+
   //edit user
   const handleEdit = (index) => {
     dispatch(editTodo(index));
   };
-
   useEffect(() => {
     var item = record;
-    console.log(12211212, item)
+    console.log(12211212, item);
     if (item) {
       setuser({
         ...user,

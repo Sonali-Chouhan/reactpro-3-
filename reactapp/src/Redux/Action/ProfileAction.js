@@ -3,7 +3,6 @@ export const addTodo = (data) => {
   return {
     type: "Add_Data",
     payload: data,
- 
   };
 };
 //delete//
@@ -21,9 +20,9 @@ export const editTodo = (index) => {
   };
 };
 //update//
-export const updateTodo=(id)=>{
-  return{
-    type:"Update_Data",
-    payload:id
+export const updateTodo = (id) => {
+  return {
+    type: "Update_Data",
+    payload: id,
   };
 };

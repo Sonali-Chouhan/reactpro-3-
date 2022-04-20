@@ -37,12 +37,7 @@ export const ProfileReducer = function (state = initialState, action) {
         }
       }
    
-      //   state.data.forEach((item)=>{
-      //     if(item.id===action.payload.id){
-      //       item.name = action.payload.name
-      //       item.email = action.payload.email
-      //     }
-      // })
+     
       return {
         ...state,
         isEdit: false,
